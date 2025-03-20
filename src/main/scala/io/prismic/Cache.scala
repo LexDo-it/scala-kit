@@ -2,7 +2,7 @@ package io.prismic
 
 import java.util.Collections
 import org.apache.commons.collections4.map.LRUMap
-import scala.collection.convert.Wrappers.JMapWrapper
+import scala.jdk.CollectionConverters._
 
 import spray.json._
 import scala.concurrent.Future
@@ -37,7 +37,7 @@ object NoCache extends Cache {
  */
 case class BuiltInCache(maxDocuments: Int = 100) extends Cache {
 
-  private val cache = JMapWrapper(Collections.synchronizedMap(new LRUMap[String, (Long, JsValue)](maxDocuments)))
+  private val cache = Collections.synchronizedMap(new LRUMap[String, (Long, JsValue)](maxDocuments)).asScala
 
   def set(key: String, data: (Long, JsValue)) {
     val (ttl, json) = data

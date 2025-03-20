@@ -15,7 +15,7 @@ import io.netty.util.CharsetUtil
 
 import spray.json._
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.concurrent.{Future, Promise}
 import scala.util.control.Exception._
 
@@ -26,7 +26,7 @@ case class ClientResponse(
   headers: HttpHeaders
 ) {
   def json: JsValue = JsonParser(body)
-  def header(key: String): Seq[String] = headers.getAll(key)
+  def header(key: String): Seq[String] = headers.getAll(key).asScala.toSeq
 }
 
 object HttpClient {

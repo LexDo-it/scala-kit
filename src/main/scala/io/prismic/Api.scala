@@ -21,9 +21,9 @@ final class Api(
     private[prismic] val cache: Cache,
     private[prismic] val logger: (Symbol, String) => Unit) {
 
-  def refs: Map[String, Ref] = data.refs.groupBy(_.label).mapValues(_.head)
+  def refs: Map[String, Ref] = data.refs.groupBy(_.label).mapValues(_.head).toMap
   def bookmarks: Map[String, String] = data.bookmarks
-  def forms: Map[String, SearchForm] = data.forms.mapValues(form => SearchForm(this, form, form.defaultData))
+  def forms: Map[String, SearchForm] = data.forms.mapValues(form => SearchForm(this, form, form.defaultData)).toMap
   def master: Ref = refs.values.collectFirst { case ref if ref.isMasterRef => ref }.getOrElse(sys.error("no master reference found"))
   /**
    * Experiments exposed by prismic.io API
@@ -222,7 +222,7 @@ case class Form(
   def defaultData: Map[String, Seq[String]] = {
     fields.mapValues(_.default).collect {
       case (key, Some(value)) => (key, Seq(value))
-    }
+    }.toMap
   }
 
 }
