@@ -1,6 +1,6 @@
 ThisBuild / organization := "com.github.LexDo-it"
 ThisBuild / name := "scala-kit"
-ThisBuild / version := "2.4.3"
+ThisBuild / version := "2.4.4"
 
 ThisBuild / scalaVersion := "2.13.16"
 
@@ -15,7 +15,7 @@ ThisBuild / libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.8.2",
   "io.spray" %% "spray-json" % "1.3.5",
   "com.jcraft" % "jzlib" % "1.1.2",
-  "io.netty" % "netty-all" % "4.0.31.Final",
+  "io.netty" % "netty-all" % "4.1.119.Final",
   "org.apache.commons" % "commons-collections4" % "4.0",
   "org.specs2" %% "specs2-core" % "4.5.1" % Test
 )
